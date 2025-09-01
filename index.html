@@ -103,6 +103,23 @@
             z-index: -1;
             overflow: hidden;
         }
+        
+        .blurred-video-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .blurred-video-bg video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            filter: blur(8px) brightness(0.5);
+        }
 
         .particle-effect-canvas {
             position: absolute;
@@ -208,6 +225,34 @@
         </div>
     </div>
 
+    <div id="influencer-modal" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop hidden">
+        <div class="neumorph-card p-8 max-w-2xl w-full text-left transform transition-all duration-300 scale-95 opacity-0 relative" id="influencer-modal-content">
+            <button id="close-influencer-modal-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="font-playfair text-3xl mb-4 gold-text">Programa de Influencers</h2>
+            <p class="text-gray-300 mb-6">En Nocturna, valoramos a quienes comparten nuestra visión de exclusividad y entretenimiento de alta calidad. Ofrecemos comisiones atractivas por cada nuevo miembro que se una a través de tu enlace de afiliado.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="border-b-2 border-gold-text/50 p-4 text-gold-text">Membresía</th>
+                            <th class="border-b-2 border-gold-text/50 p-4 text-gold-text">Comisión</th>
+                            <th class="border-b-2 border-gold-text/50 p-4 text-gold-text">Valor (COP)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr><td class="border-b border-gray-700 p-4">Club</td><td class="border-b border-gray-700 p-4">15%</td><td class="border-b border-gray-700 p-4">$60.000</td></tr>
+                        <tr><td class="border-b border-gray-700 p-4">Black</td><td class="border-b border-gray-700 p-4">20%</td><td class="border-b border-gray-700 p-4">$120.000</td></tr>
+                        <tr><td class="p-4">Ilimitada</td><td class="p-4">Fija</td><td class="p-4">$200.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-6">Para más detalles sobre cómo unirte al programa, por favor contacta a nuestro equipo de soporte.</p>
+        </div>
+    </div>
+
+
     <!-- Chatbot Modal -->
     <div id="chatbot-modal" class="fixed bottom-4 right-4 z-50 w-full max-w-lg hidden">
         <div class="neumorph-card m-0 w-full h-[75vh] max-h-[600px] flex flex-col transform transition-all duration-300 translate-y-full opacity-0" id="chatbot-modal-content">
@@ -244,6 +289,7 @@
                     <a href="#servicios" class="hover:gold-text transition-colors">Servicios</a>
                     <a href="#membresia" class="hover:gold-text transition-colors">Membresía</a>
                     <a href="#eventos" class="hover:gold-text transition-colors">Eventos</a>
+                    <a href="#testimonios" class="hover:gold-text transition-colors">Testimonios</a>
                     <a href="#noticias" class="hover:gold-text transition-colors">Noticias</a>
                     <a href="#contacto" class="hover:gold-text transition-colors">Contacto</a>
                 </div>
@@ -256,6 +302,7 @@
             <div class="text-center z-10 px-6">
                 <h1 class="font-playfair text-5xl md:text-7xl font-bold text-white leading-tight mb-4 title-3d">Donde la noche cobra vida.</h1>
                 <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">Tu acceso a un universo privado de sensaciones, arte erótico y entretenimiento exclusivo para adultos.</p>
+                <p class="font-playfair text-xl md:text-2xl gold-text italic my-8">"Ella no cobra por amor. Ella cobra por experiencias. 🔥"</p>
                 <a href="#filosofia" class="neumorph-btn btn-gold inline-block font-bold py-3 px-8 rounded-lg text-lg">Descubrir Nocturna</a>
             </div>
         </section>
@@ -276,13 +323,57 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-4 scroll-animate">Servicios Exclusivos</h2>
                 <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-16 scroll-animate">Elevamos tu experiencia con servicios personalizados, diseñados para conectar, aprender y relajarse.</p>
-                <div class="grid md:grid-cols-3 gap-12">
-                    <div class="neumorph-card overflow-hidden scroll-animate"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/Nocturna%20-%20Video%20llamadas.JPEG" alt="Videollamadas Íntimas" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Videollamadas Íntimas</h3><p class="text-gray-400">Programa sesiones privadas con nuestras modelos para una conexión más personal y directa.</p></div></div>
-                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA%20-%20COACHING.png" alt="Coaching de Seducción" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Coaching de Seducción</h3><p class="text-gray-400">Accede a material exclusivo y consejos prácticos sobre seducción, dinámicas sociales y mejora sexual.</p></div></div>
-                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 300ms;"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA-%20MOTIVACIONAL.png" alt="Charlas y Compañía" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Charlas y Compañía</h3><p class="text-gray-400">¿Un día agotador? Desestrésate. Conversa con alguien que sabe escuchar, en un espacio seguro y sin juicios.</p></div></div>
+                
+                <!-- Digital Services -->
+                <div class="grid md:grid-cols-3 gap-12 mb-16">
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate">
+                        <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/Nocturna%20-%20Video%20llamadas.JPEG" alt="Videollamadas Íntimas" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Videollamadas Íntimas</h3><p class="text-gray-400 flex-grow">Programa sesiones privadas con nuestras modelos para una conexión más personal y directa.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Club / Black / Ilimitada</span></div></div>
+                    </div>
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate" style="transition-delay: 150ms;">
+                        <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA%20-%20COACHING.png" alt="Coaching de Seducción" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Coaching de Seducción</h3><p class="text-gray-400 flex-grow">Accede a material exclusivo y consejos prácticos sobre seducción, dinámicas sociales y mejora sexual.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Club / Black / Ilimitada</span></div></div>
+                    </div>
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate" style="transition-delay: 300ms;">
+                        <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA-%20MOTIVACIONAL.png" alt="Charlas y Compañía" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Charlas y Compañía</h3><p class="text-gray-400 flex-grow">¿Un día agotador? Desestrésate. Conversa con alguien que sabe escuchar, en un espacio seguro y sin juicios.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Club / Black / Ilimitada</span></div></div>
+                    </div>
                 </div>
+
+                 <!-- Presencial Services -->
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate">
+                         <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/Nocturna/refs/heads/main/Nocturna%20-%20Cena%20elegante.png" alt="Charlas y Networking" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Charlas y Networking</h3><p class="text-gray-400 flex-grow">Participa en charlas presenciales sobre nuestras experiencias y eventos de networking para conectar y hacer comunidad.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Black / Ilimitada</span></div></div>
+                    </div>
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate" style="transition-delay: 150ms;">
+                         <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/Nocturna/refs/heads/main/Nocturna%20-%20Acceso%20Lounges.png" alt="Acceso a Lounges" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Acceso a Lounges</h3><p class="text-gray-400 flex-grow">Disfruta de nuestros lounges privados asociados, el lugar perfecto para relajarte con un cóctel después de un largo día.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Black / Ilimitada</span></div></div>
+                    </div>
+                    <div class="neumorph-card overflow-hidden flex flex-col scroll-animate" style="transition-delay: 300ms;">
+                         <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/Nocturna/refs/heads/main/Nocturna%20-%20Eventos%20presenciales.png" alt="Salidas e Integraciones" class="w-full h-48 object-cover opacity-80">
+                        <div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-playfair font-bold mb-2">Salidas e Integraciones</h3><p class="text-gray-400 flex-grow">Participa en salidas de integración a fincas y sitios exclusivos en Cundinamarca. Una oportunidad para conectar en un ambiente privado y natural. Próximamente en otras regiones.</p>
+                        <div class="mt-4"><span class="inline-block bg-gray-800 text-gold-text text-xs font-semibold px-3 py-1 rounded-full">Black / Ilimitada</span></div></div>
+                    </div>
+                </div>
+
             </div>
         </section>
+        
+        <section class="py-20 sm:py-32 blurred-video-bg">
+            <video playsinline autoplay muted loop poster="https://images.unsplash.com/photo-1543007168-5fa6b7c352b2?q=80&w=1965&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                <!-- Add video source here if available -->
+            </video>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h2 class="font-playfair text-4xl sm:text-5xl text-white italic leading-tight scroll-animate">"Lo que pasa en Nocturna… <br>no se cuenta, pero se siente."</h2>
+            </div>
+        </section>
+
 
         <section id="membresia" class="py-20 sm:py-32">
             <div class="container mx-auto px-6">
@@ -302,8 +393,9 @@
                         <h3 class="font-playfair text-3xl font-bold mb-2 gold-text">Membresía Club</h3><p class="text-gray-400 mb-6">La experiencia digital completa.</p>
                         <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="100" data-price-cop="400000"><span class="price-currency">$</span><span class="price-amount">100</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
                         <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
-                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso a galerías completas: fotos y videos de nuestras modelos.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso a galerías 100% libres (fotos/videos).</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Contenido nuevo cada 15 días.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Videollamadas Íntimas (2 por semana).</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Tips de seducción y mejora sexual.</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Sesiones de charla, juego y diversión.</span></li>
                         </ul>
@@ -315,9 +407,9 @@
                         <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="150" data-price-cop="600000"><span class="price-currency">$</span><span class="price-amount">150</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
                         <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
                             <li class="flex items-start"><span class="font-bold gold-text mr-3 mt-1">&#10022;</span> <span><span class="font-bold">Todo lo del plan Club</span>, y además:</span></li>
-                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso prioritario a eventos presenciales.</span></li>
-                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Invitaciones a fiestas exclusivas y lounges.</span></li>
-                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Servicio de Charlas y Compañía.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Videollamadas Íntimas (2 por semana).</span></li>
+                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso a Cenas, Lounges y Experiencias (2 por semana).</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso prioritario a Eventos Especiales.</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Contenido detrás de cámaras.</span></li>
                         </ul>
                         <button data-plan="Black" class="open-modal-btn neumorph-btn btn-gold font-bold py-3 px-8 rounded-lg text-lg mt-auto">Seleccionar Black</button>
@@ -328,7 +420,7 @@
                         <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="250" data-price-cop="1000000"><span class="price-currency">$</span><span class="price-amount">250</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
                         <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
                             <li class="flex items-start"><span class="font-bold gold-text mr-3 mt-1">&#10022;</span> <span><span class="font-bold">Todo lo del plan Black</span>, y además:</span></li>
-                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso ilimitado a todos los eventos.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso ilimitado a todos los eventos y experiencias.</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Videollamadas Íntimas (1 diaria MAX).</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Sesiones y charlas ilimitadas (1 MAX por día).</span></li>
                             <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Atención y soporte prioritario.</span></li>
@@ -395,7 +487,10 @@
                         <div class="p-8">
                             <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Festival de la Cerveza <span class="text-base text-gray-400">(Solo Adultos)</span></h3>
                             <p class="text-gray-400 mb-4">Una tarde de degustación con las mejores cervezas artesanales, música en vivo y buena compañía en un ambiente exclusivo.</p>
-                            <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                                <span class="font-bold text-yellow-400 text-sm">¡Solo 20 cupos!</span>
+                            </div>
                         </div>
                     </div>
                     <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;">
@@ -403,8 +498,38 @@
                         <div class="p-8">
                              <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Salida Turística para Adultos a Finca Privada</h3>
                             <p class="text-gray-400 mb-4">Escápate a una finca de lujo a las afueras de Bogotá. Disfruta de piscina, buen clima y actividades exclusivas en total privacidad.</p>
-                             <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                            <div class="flex justify-between items-center mt-4">
+                                 <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                                 <span class="font-bold text-yellow-400 text-sm">¡Solo 20 cupos!</span>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonios" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold text-center mb-4 scroll-animate">Lo Que Dicen Nuestros Miembros</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16 scroll-animate">Historias reales de experiencias inolvidables. La discreción es nuestra prioridad.</p>
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-12">
+                    <!-- Testimonial 1 -->
+                    <div class="neumorph-card p-8 scroll-animate">
+                        <svg class="w-10 h-10 gold-text mb-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.983 3v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3zm12 0v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3z"/></svg>
+                        <p class="text-gray-300 italic mb-4">"Yo pensé que era un chiste… terminé con tres mujeres en una finca en Cundinamarca…"</p>
+                        <p class="font-bold text-right gold-text">- Miembro Anónimo</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="neumorph-card p-8 scroll-animate" style="transition-delay: 150ms;">
+                         <svg class="w-10 h-10 gold-text mb-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.983 3v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3zm12 0v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3z"/></svg>
+                        <p class="text-gray-300 italic mb-4">"Yo pagué pensando que era una estafa… y ahora soy miembro ilimitado."</p>
+                        <p class="font-bold text-right gold-text">- Miembro Black</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="neumorph-card p-8 scroll-animate" style="transition-delay: 300ms;">
+                        <svg class="w-10 h-10 gold-text mb-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.983 3v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3zm12 0v7.391c0 2.908-2.35 5.258-5.25 5.258h-1.5c-.825 0-1.5.675-1.5 1.5s.675 1.5 1.5 1.5h1.5c4.562 0 8.25-3.688 8.25-8.25V3h-3z"/></svg>
+                        <p class="text-gray-300 italic mb-4">"Llegaba reventado del trabajo y no tenía con quién hablar. Las charlas acá son otro nivel, sin rodeos, gente que de verdad te escucha. Me cambió las noches."</p>
+                        <p class="font-bold text-right gold-text">- Miembro Club</p>
                     </div>
                 </div>
             </div>
@@ -475,6 +600,7 @@
                 <div class="flex justify-center space-x-6 mb-6">
                      <a href="#" class="hover:text-gray-300 transition-colors">Términos y Condiciones</a>
                     <a href="#" class="hover:text-gray-300 transition-colors">Política de Privacidad</a>
+                     <a href="#" id="open-influencer-modal-btn" class="hover:text-gray-300 transition-colors">Programa de Influencers</a>
                 </div>
                 <p>&copy; 2025 Nocturna Club. Todos los derechos reservados.</p>
                 <p class="text-sm mt-2">Plataforma de entretenimiento para mayores de 18 años.</p>
@@ -510,6 +636,7 @@
             // --- Modals General Logic ---
             const setupModal = (modalId, openBtnsSelector, closeBtnId) => {
                 const modal = document.getElementById(modalId);
+                if (!modal) return null;
                 const modalContent = modal.querySelector('.neumorph-card');
                 const openBtns = document.querySelectorAll(openBtnsSelector);
                 const closeBtn = document.getElementById(closeBtnId);
@@ -548,14 +675,18 @@
                     }, 300);
                 };
 
-                openBtns.forEach(btn => btn.addEventListener('click', () => open(btn.dataset.plan || null)));
-                closeBtn.addEventListener('click', close);
+                openBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    open(btn.dataset.plan || null)
+                }));
+                if (closeBtn) closeBtn.addEventListener('click', close);
                 modal.addEventListener('click', (e) => e.target === modal && close());
                 
                 return { open, close };
             };
             
             const membershipModal = setupModal('membership-modal', '.open-modal-btn', 'close-modal-btn');
+            const influencerModal = setupModal('influencer-modal', '#open-influencer-modal-btn', 'close-influencer-modal-btn');
             
             // --- Chatbot Specific Logic (non-modal) ---
             const chatbotModal = document.getElementById('chatbot-modal');
@@ -643,8 +774,8 @@
 
             const getBotResponse = (userInput) => {
                 const lowerInput = userInput.toLowerCase();
-                if (lowerInput.includes('club')) return 'La Membresía Club ($100 USD / $400.000 COP) te da acceso a todas nuestras galerías de fotos y videos, contenido nuevo cada 15 días, tips de seducción y sesiones de charla y diversión.';
-                if (lowerInput.includes('black')) return 'La Membresía Black ($150 USD / $600.000 COP) incluye todo lo del plan Club, más acceso prioritario a eventos presenciales, invitaciones a fiestas exclusivas y el servicio de Charlas y Compañía.';
+                if (lowerInput.includes('club')) return 'La Membresía Club ($100 USD / $400.000 COP) te da acceso a todas nuestras galerías, contenido nuevo, 2 videollamadas por semana, tips de seducción y sesiones de charla y diversión.';
+                if (lowerInput.includes('black')) return 'La Membresía Black ($150 USD / $600.000 COP) incluye todo lo del plan Club, más 2 experiencias presenciales (cenas, lounges) por semana y acceso prioritario a eventos especiales como el Festival de la Cerveza.';
                 if (lowerInput.includes('ilimitada')) return 'Nuestra Membresía Ilimitada ($250 USD / $1.000.000 COP) es la experiencia definitiva. Incluye todo lo de Black, más acceso ilimitado a todos los eventos y sesiones de videollamada y charla (con un máximo de 1 por día). ¡Recuerda que los cupos son limitados!';
                 if (lowerInput.includes('precio') || lowerInput.includes('costo')) return 'Tenemos 3 membresías: Club por $100 USD, Black por $150 USD, e Ilimitada por $250 USD al mes. Puedes ver los precios en pesos colombianos usando el interruptor en la sección de membresías.';
                 if (lowerInput.includes('eventos')) return 'Nuestros eventos presenciales como el Festival de la Cerveza y las Salidas a Fincas Privadas son exclusivos para miembros Black e Ilimitada. Se realizan en Bogotá y sus alrededores.';
@@ -722,6 +853,4 @@
     </script>
 </body>
 </html>
-
-
 

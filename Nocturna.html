@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturna - Club Privado de Entretenimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --shadow-dark: #121212;
+            --shadow-light: #222222;
+            --gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: #E0E0E0;
+            overflow-x: hidden;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background-image: url('https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/FOTO%20PORTADA%20NOCTURA.JPEG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .gradient-overlay {
+             background: linear-gradient(to bottom, rgba(26, 26, 26, 0) 0%, rgba(26, 26, 26, 0.4) 50%, var(--bg-color) 95%);
+        }
+
+        .gold-text {
+            color: var(--gold);
+        }
+        
+        .title-3d {
+            text-shadow: 0px 1px 0px #c0c0c0,
+                         0px 2px 0px #b0b0b0,
+                         0px 3px 0px #a0a0a0,
+                         0px 4px 0px #909090,
+                         0px 5px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- Neumorphism Styles --- */
+        .neumorph-card {
+            background: var(--bg-color);
+            border-radius: 30px;
+            box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .neumorph-btn {
+            background: var(--bg-color);
+            border-radius: 20px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            transition: all 0.15s ease-in-out;
+        }
+
+        .neumorph-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .neumorph-btn:active {
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+            transform: translateY(1px);
+        }
+        
+        .btn-gold {
+            background: var(--gold);
+            color: #101010;
+        }
+        .btn-gold:active {
+             box-shadow: inset 6px 6px 12px #a88a2c, inset -6px -6px 12px #ffda42;
+        }
+
+        .neumorph-input {
+            background-color: var(--bg-color);
+            border-radius: 15px;
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+        }
+        
+        /* --- Background Effects --- */
+        #background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle-effect-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* --- New Aurora Effect --- */
+        .aurora-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.4;
+            overflow: hidden;
+        }
+        
+        .aurora {
+            position: absolute;
+            border-radius: 50%;
+            mix-blend-mode: plus-lighter;
+            filter: blur(80px);
+            animation: drift 20s infinite alternate;
+        }
+
+        .aurora:nth-child(1) { width: 500px; height: 500px; top: -20%; left: 10%; background: radial-gradient(circle, #5eead4, transparent 60%); animation-duration: 25s; }
+        .aurora:nth-child(2) { width: 600px; height: 600px; top: 10%; right: -30%; background: radial-gradient(circle, #c4b5fd, transparent 60%); animation-duration: 30s; animation-direction: alternate-reverse; }
+        .aurora:nth-child(3) { width: 550px; height: 550px; bottom: -25%; left: 20%; background: radial-gradient(circle, #a5b4fc, transparent 60%); animation-duration: 22s; }
+        .aurora:nth-child(4) { width: 450px; height: 450px; bottom: 5%; right: 10%; background: radial-gradient(circle, #f0abfc, transparent 60%); animation-duration: 35s; animation-direction: alternate-reverse; }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(100px, 50px) rotate(15deg) scale(1.2); }
+        }
+        
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Scroll Animation --- */
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* --- Currency Toggle --- */
+        .currency-toggle-bg { background-color: var(--shadow-dark); border-radius: 9999px; }
+        .currency-toggle-btn { top: 2px; left: 2px; background-color: white; border-radius: 9999px; transition: transform 0.3s ease; }
+        .currency-toggle-checkbox:checked + .currency-toggle-bg .currency-toggle-btn { transform: translateX(36px); }
+
+        /* --- Chatbot --- */
+        .chat-bubble { max-width: 75%; }
+        .chat-bubble-user { background-color: var(--gold); color: #1a1a1a; }
+        .chat-bubble-bot { background-color: #333; }
+        .typing-indicator span { height: 8px; width: 8px; background-color: #9ca3af; border-radius: 50%; display: inline-block; animation: wave 1.3s infinite; }
+        .typing-indicator span:nth-of-type(2) { animation-delay: -1.1s; }
+        .typing-indicator span:nth-of-type(3) { animation-delay: -0.9s; }
+        @keyframes wave { 0%, 60%, 100% { transform: initial; } 30% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects Container -->
+    <div id="background-effects">
+        <div class="aurora-container">
+            <div class="aurora"></div>
+            <div class="aurora"></div>
+            <div class="aurora"></div>
+            <div class="aurora"></div>
+        </div>
+        <canvas class="particle-effect-canvas" id="fireflies-canvas"></canvas>
+    </div>
+
+    <!-- Modals -->
+    <div id="age-gate" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop">
+        <div class="neumorph-card p-8 max-w-sm w-full text-center transform transition-all duration-300 scale-95 opacity-0" id="age-gate-content">
+            <h2 class="font-playfair text-3xl mb-4 gold-text">Bienvenido a Nocturna</h2>
+            <p class="text-gray-300 mb-6">Debes tener al menos 18 años para acceder a este sitio.</p>
+            <p class="text-gray-400 mb-8">Por favor, confirma tu edad.</p>
+            <div class="flex flex-col space-y-6">
+                <button id="confirm-age" class="w-full neumorph-btn btn-gold font-bold py-3 px-6 rounded-lg text-lg">Sí, tengo 18 años o más</button>
+                <button onclick="window.location.href='https://www.google.com'" class="w-full neumorph-btn bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600">No, salir</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="membership-modal" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop hidden">
+        <div class="neumorph-card p-8 max-w-lg w-full text-left transform transition-all duration-300 scale-95 opacity-0 relative" id="membership-modal-content">
+            <button id="close-modal-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div id="form-container">
+                <h2 class="font-playfair text-3xl mb-2 gold-text">Solicitud de Membresía</h2>
+                <p class="text-gray-400 mb-6" id="modal-plan-text">Completa el formulario para iniciar tu proceso.</p>
+                <form id="membership-form">
+                    <input type="hidden" id="plan-type" name="plan">
+                    <div class="mb-4"><label for="name" class="block text-gray-300 mb-2">Nombre Completo</label><input type="text" id="name" name="name" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" required></div>
+                    <div class="mb-4"><label for="email" class="block text-gray-300 mb-2">Correo Electrónico</label><input type="email" id="email" name="email" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" required></div>
+                    <div class="mb-6"><label for="message" class="block text-gray-300 mb-2">¿Por qué te gustaría unirte a Nocturna?</label><textarea id="message" name="message" rows="4" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" placeholder="Opcional"></textarea></div>
+                    <button type="submit" class="w-full neumorph-btn btn-gold font-bold py-3 px-6 rounded-lg text-lg">Enviar Solicitud</button>
+                </form>
+            </div>
+            <div id="success-message" class="text-center hidden"><h2 class="font-playfair text-3xl mb-4 gold-text">¡Gracias!</h2><p class="text-gray-300">Hemos recibido tu solicitud. Nuestro equipo la revisará y se pondrá en contacto contigo pronto.</p><p class="text-sm text-gray-500 mt-4">Este panel se cerrará automáticamente.</p></div>
+        </div>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbot-modal" class="fixed inset-0 z-50 flex items-end justify-center sm:justify-end modal-backdrop hidden">
+        <div class="neumorph-card m-4 w-full max-w-lg h-3/4 flex flex-col transform transition-all duration-300 translate-y-full" id="chatbot-modal-content">
+            <div class="p-4 flex items-center justify-between border-b border-gray-700">
+                <div class="flex items-center gap-4">
+                    <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/main/Noctura%20-%20Sofia%20DE%20MEDELLIN.png" alt="Sofia AI" class="rounded-full w-10 h-10 object-cover">
+                    <div>
+                        <h3 class="font-bold text-lg gold-text">Sofía</h3>
+                        <p class="text-sm text-gray-400">Asistente en Medellín</p>
+                    </div>
+                </div>
+                <button id="close-chatbot-btn" class="text-gray-400 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+            </div>
+            <div id="chat-window" class="flex-1 p-4 overflow-y-auto flex flex-col gap-4">
+                <!-- Chat messages will be appended here -->
+            </div>
+            <div class="p-4 border-t border-gray-700">
+                <form id="chat-form" class="flex gap-2">
+                    <input type="text" id="chat-input" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" placeholder="Escribe tu pregunta..." autocomplete="off">
+                    <button type="submit" class="neumorph-btn btn-gold p-3 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" /></svg></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div id="main-content" class="invisible">
+        <header class="fixed top-0 left-0 right-0 z-40 bg-black/50 backdrop-blur-md transition-all duration-300" id="header">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="font-playfair text-2xl font-bold gold-text"><a href="#">Nocturna</a></div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#filosofia" class="hover:gold-text transition-colors">Filosofía</a>
+                    <a href="#servicios" class="hover:gold-text transition-colors">Servicios</a>
+                    <a href="#membresia" class="hover:gold-text transition-colors">Membresía</a>
+                    <a href="#eventos" class="hover:gold-text transition-colors">Eventos</a>
+                    <a href="#noticias" class="hover:gold-text transition-colors">Noticias</a>
+                    <a href="#contacto" class="hover:gold-text transition-colors">Contacto</a>
+                </div>
+                <div><button data-plan="Sin especificar" class="open-modal-btn neumorph-btn btn-gold font-bold py-2 px-5 rounded-lg">Hazte Miembro</button></div>
+            </nav>
+        </header>
+
+        <section class="hero-bg min-h-screen flex items-center justify-center relative">
+            <div class="absolute inset-0 gradient-overlay"></div>
+            <div class="text-center z-10 px-6">
+                <h1 class="font-playfair text-5xl md:text-7xl font-bold text-white leading-tight mb-4 title-3d">Donde la noche cobra vida.</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">Tu acceso a un universo privado de sensaciones, arte erótico y entretenimiento exclusivo para adultos.</p>
+                <a href="#filosofia" class="neumorph-btn btn-gold inline-block font-bold py-3 px-8 rounded-lg text-lg">Descubrir Nocturna</a>
+            </div>
+        </section>
+
+        <section id="filosofia" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-4 scroll-animate">Nuestra Filosofía</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-16 scroll-animate">Nocturna es más que una plataforma; es un club privado digital que celebra la sensualidad y el erotismo como una forma de arte. Nuestro compromiso es absoluto con la seguridad, la discreción y el respeto.</p>
+                <div class="grid md:grid-cols-3 gap-12">
+                     <div class="neumorph-card p-8 flex flex-col items-center scroll-animate"><div class="w-16 h-16 mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg></div><h3 class="text-2xl font-playfair font-bold mb-2">Exclusividad y Privacidad</h3><p class="text-gray-400">Acceso solo para miembros verificados. Tu identidad y tus interacciones están protegidas con la máxima discreción.</p></div>
+                     <div class="neumorph-card p-8 flex flex-col items-center scroll-animate" style="transition-delay: 150ms;"><div class="w-16 h-16 mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><h3 class="text-2xl font-playfair font-bold mb-2">Arte y Sensualidad</h3><p class="text-gray-400">Fomentamos contenido de alta calidad creado por modelos profesionales. Celebramos la belleza del erotismo en un entorno seguro y respetuoso.</p></div>
+                     <div class="neumorph-card p-8 flex flex-col items-center scroll-animate" style="transition-delay: 300ms;"><div class="w-16 h-16 mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div><h3 class="text-2xl font-playfair font-bold mb-2">Entorno 100% Legal</h3><p class="text-gray-400">Operamos como una plataforma de entretenimiento. No intermediamos ni promovemos encuentros físicos o actividades ilegales.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-4 scroll-animate">Servicios Exclusivos</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-16 scroll-animate">Elevamos tu experiencia con servicios personalizados, diseñados para conectar, aprender y relajarse.</p>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="neumorph-card overflow-hidden scroll-animate"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/Nocturna%20-%20Video%20llamadas.JPEG" alt="Videollamadas Íntimas" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Videollamadas Íntimas</h3><p class="text-gray-400">Programa sesiones privadas con nuestras modelos para una conexión más personal y directa.</p></div></div>
+                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA%20-%20COACHING.png" alt="Coaching de Seducción" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Coaching de Seducción</h3><p class="text-gray-400">Accede a material exclusivo y consejos prácticos sobre seducción, dinámicas sociales y mejora sexual.</p></div></div>
+                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 300ms;"><img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/refs/heads/main/NOCTURA-%20MOTIVACIONAL.png" alt="Charlas y Compañía" class="w-full h-48 object-cover opacity-80"><div class="p-8"><h3 class="text-2xl font-playfair font-bold mb-2">Charlas y Compañía</h3><p class="text-gray-400">¿Un día agotador? Desestrésate. Conversa con alguien que sabe escuchar, en un espacio seguro y sin juicios.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="membresia" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-4 scroll-animate">Elige tu Acceso</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-8 scroll-animate">Ofrecemos tres niveles de membresía diseñados para ajustarse a la experiencia que buscas.</p>
+                    <div class="flex items-center justify-center gap-4 scroll-animate">
+                        <span class="font-semibold text-lg">USD</span>
+                        <label for="currency-toggle" class="relative inline-block w-16 h-8 cursor-pointer"><input type="checkbox" id="currency-toggle" class="opacity-0 w-0 h-0 currency-toggle-checkbox"><div class="absolute inset-0 currency-toggle-bg"><div class="absolute w-6 h-6 currency-toggle-btn"></div></div></label>
+                        <span class="font-semibold text-lg">COP</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+                    <!-- Plan Club -->
+                    <div class="neumorph-card p-8 flex flex-col scroll-animate">
+                        <h3 class="font-playfair text-3xl font-bold mb-2 gold-text">Membresía Club</h3><p class="text-gray-400 mb-6">La experiencia digital completa.</p>
+                        <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="100" data-price-cop="400000"><span class="price-currency">$</span><span class="price-amount">100</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
+                        <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso a galerías completas: fotos y videos de nuestras modelos.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Contenido nuevo cada 15 días.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Tips de seducción y mejora sexual.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Sesiones de charla, juego y diversión.</span></li>
+                        </ul>
+                        <button data-plan="Club" class="open-modal-btn neumorph-btn text-white font-bold py-3 px-8 rounded-lg mt-auto">Seleccionar Club</button>
+                    </div>
+                    <!-- Plan Black -->
+                    <div class="neumorph-card p-8 flex flex-col border-2 border-gold-text relative scroll-animate" style="transition-delay: 150ms;">
+                        <h3 class="font-playfair text-3xl font-bold mb-2 gold-text">Membresía Black</h3><p class="text-gray-400 mb-6">El acceso total a eventos y más.</p>
+                        <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="150" data-price-cop="600000"><span class="price-currency">$</span><span class="price-amount">150</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
+                        <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="font-bold gold-text mr-3 mt-1">&#10022;</span> <span><span class="font-bold">Todo lo del plan Club</span>, y además:</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso prioritario a eventos presenciales.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Invitaciones a fiestas exclusivas y lounges.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Servicio de Charlas y Compañía.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Contenido detrás de cámaras.</span></li>
+                        </ul>
+                        <button data-plan="Black" class="open-modal-btn neumorph-btn btn-gold font-bold py-3 px-8 rounded-lg text-lg mt-auto">Seleccionar Black</button>
+                    </div>
+                    <!-- Plan Ilimitado -->
+                    <div class="neumorph-card p-8 flex flex-col scroll-animate" style="transition-delay: 300ms;">
+                        <h3 class="font-playfair text-3xl font-bold mb-2 gold-text">Membresía Ilimitada</h3><p class="text-gray-400 mb-2">La experiencia definitiva. Sin restricciones.</p><p class="text-sm text-yellow-400 mb-4 font-semibold">(Cupos limitados)</p>
+                        <div class="text-5xl font-bold text-white my-4 price-container" data-price-usd="250" data-price-cop="1000000"><span class="price-currency">$</span><span class="price-amount">250</span> <span class="text-lg font-normal text-gray-400 price-period">USD/mes</span></div>
+                        <ul class="space-y-4 text-gray-300 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="font-bold gold-text mr-3 mt-1">&#10022;</span> <span><span class="font-bold">Todo lo del plan Black</span>, y además:</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Acceso ilimitado a todos los eventos.</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Videollamadas Íntimas (1 diaria MAX).</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Sesiones y charlas ilimitadas (1 MAX por día).</span></li>
+                            <li class="flex items-start"><span class="gold-text mr-3 mt-1">&#10003;</span> <span>Atención y soporte prioritario.</span></li>
+                        </ul>
+                        <button data-plan="Ilimitada" class="open-modal-btn neumorph-btn text-white font-bold py-3 px-8 rounded-lg mt-auto">Seleccionar Ilimitada</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chatbot-section" class="py-20 sm:py-24">
+            <div class="container mx-auto px-6">
+                <div class="neumorph-card p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 scroll-animate">
+                    <div class="flex-shrink-0 text-center md:text-left">
+                        <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/main/Noctura%20-%20Sofia%20DE%20MEDELLIN.png" alt="Sofia Avatar" class="rounded-full w-24 h-24 object-cover mx-auto md:mx-0 mb-4 border-4 border-gold-text/50">
+                    </div>
+                    <div class="text-center md:text-left flex-grow">
+                        <h3 class="font-playfair text-3xl font-bold gold-text mb-2">¿Tienes preguntas?</h3>
+                        <p class="text-lg text-gray-300">Chatea con Sofía, nuestra asistente en Medellín. Ella puede resolver tus dudas sobre membresías, servicios y eventos al instante.</p>
+                    </div>
+                    <div class="flex-shrink-0 w-full md:w-auto">
+                        <button id="open-chatbot-btn" class="w-full neumorph-btn btn-gold font-bold py-4 px-8 rounded-lg text-lg">Hablar con Sofía</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trial-section" class="py-20 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold mb-4 scroll-animate">Experimenta la Exclusividad</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12 scroll-animate">Te damos la bienvenida con una sesión de prueba para que compruebes la calidad y veracidad de nuestro servicio. Sin compromisos.</p>
+                <div class="max-w-3xl mx-auto neumorph-card p-8 md:p-10 scroll-animate">
+                    <h3 class="font-playfair text-3xl font-bold gold-text mb-4">Tu Prueba Gratuita de 10 Minutos</h3>
+                    <p class="text-xl text-white mb-2">Disfruta de una charla íntima y estimulante con una de nuestras modelos seleccionadas.</p>
+                    <p class="text-gray-400 mb-6">Agenda tu sesión (sujeto a disponibilidad de la modelo).</p>
+                    <button data-plan="Prueba Gratuita" class="open-modal-btn neumorph-btn btn-gold font-bold py-4 px-10 rounded-lg text-xl">Reclamar mi Prueba</button>
+                    <div class="mt-8 text-left text-xs text-gray-500">
+                        <p class="font-bold mb-2">Términos y Condiciones de la Prueba:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>La sesión de prueba es única e intransferible, válida solo para nuevos usuarios.</li>
+                            <li>Para garantizar la exclusividad y seguridad, requerimos una validación de identidad (cédula y biometría facial) antes de la sesión.</li>
+                            <li>Este proceso asegura que cada persona disfrute de su prueba una sola vez y previene el mal uso del servicio.</li>
+                            <li>La modelo validará tu identidad al inicio de la llamada para confirmar que coincide con los datos proporcionados.</li>
+                            <li>Tus datos son 100% privados y se utilizan únicamente para el proceso de validación. Jamás serán compartidos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold text-center mb-4 scroll-animate">Eventos Exclusivos</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-8 scroll-animate">Curamos experiencias presenciales únicas. Noches inolvidables en un ambiente seguro, elegante y discreto.</p>
+                <div class="max-w-4xl mx-auto text-center mb-16 scroll-animate">
+                    <div class="border-2 border-dashed border-gold-text/50 rounded-2xl p-6">
+                        <h4 class="font-bold gold-text mb-2">Información Importante de Ubicación</h4>
+                        <p class="text-gray-300">Todos los eventos presenciales serán realizados en Bogotá y sus alrededores. Próximamente en otros sitios del país. Planeamos experiencias en locaciones reservadas como Airbnb de lujo, fincas privadas y hoteles boutique.</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="neumorph-card overflow-hidden scroll-animate">
+                        <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/main/Fiesta%20de%20la%20cerveza.png" alt="Festival de la Cerveza" class="w-full h-64 object-cover opacity-80">
+                        <div class="p-8">
+                            <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Festival de la Cerveza <span class="text-base text-gray-400">(Solo Adultos)</span></h3>
+                            <p class="text-gray-400 mb-4">Una tarde de degustación con las mejores cervezas artesanales, música en vivo y buena compañía en un ambiente exclusivo.</p>
+                            <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                        </div>
+                    </div>
+                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;">
+                        <img src="https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?q=80&w=2070&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Salida Turística para Adultos a Finca Privada" class="w-full h-64 object-cover opacity-80">
+                        <div class="p-8">
+                             <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Salida Turística para Adultos a Finca Privada</h3>
+                            <p class="text-gray-400 mb-4">Escápate a una finca de lujo a las afueras de Bogotá. Disfruta de piscina, buen clima y actividades exclusivas en total privacidad.</p>
+                             <span class="inline-block bg-gray-800 text-gold-text text-sm font-semibold px-3 py-1 rounded-full">Exclusivo Miembros Black & Ilimitada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="noticias" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold text-center mb-4 scroll-animate">Últimas Noticias</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16 scroll-animate">Mantente al día con las novedades, próximos eventos y anuncios importantes de nuestro club.</p>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="neumorph-card overflow-hidden scroll-animate"><img src="https://images.unsplash.com/photo-1597563179532-a54b38d7a1a2?q=80&w=2070&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Anuncio de Expansión a Medellín" class="w-full h-64 object-cover opacity-80"><div class="p-8"><p class="text-sm text-gray-400 mb-2">AGOSTO 2025</p><h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Anuncio de Expansión</h3><p class="text-gray-400 mb-4">Estamos emocionados de anunciar nuestros planes de llevar la experiencia Nocturna a Medellín y Cali a principios del próximo año.</p></div></div>
+                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;"><img src="https://images.unsplash.com/photo-1551024709-8f237c2045e5?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Alianza con marca de licores premium" class="w-full h-64 object-cover opacity-80"><div class="p-8"><p class="text-sm text-gray-400 mb-2">SEPTIEMBRE 2025</p><h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Nueva Alianza Estratégica</h3><p class="text-gray-400 mb-4">Nocturna se asocia con una marca de licores premium para llevar nuestros eventos al siguiente nivel de sofisticación.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-20 sm:py-32">
+            <div class="container mx-auto px-6">
+                <h2 class="font-playfair text-4xl sm:text-5xl font-bold text-center mb-4 scroll-animate">Contacto</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16 scroll-animate">¿Tienes preguntas? Estamos aquí para ayudarte. Contáctanos directamente o déjanos tus datos.</p>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <!-- Direct Contact -->
+                    <div class="text-center md:text-left scroll-animate">
+                        <h3 class="font-playfair text-3xl font-bold mb-4 gold-text">Atención Inmediata</h3>
+                        <p class="text-gray-400 mb-8">Haz clic en uno de los botones para iniciar una conversación directa con nuestro equipo de soporte.</p>
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+                            <a href="#" class="neumorph-btn bg-green-500 text-white font-bold py-4 px-8 rounded-lg flex items-center justify-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>WhatsApp</a>
+                            <a href="#" class="neumorph-btn bg-blue-500 text-white font-bold py-4 px-8 rounded-lg flex items-center justify-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13H2l1.93-1.93a10.86 10.86 0 0 1-1.4-6.37C2.53 2.71 7.29 0 12.5 0S22.47 2.71 22.47 4.73c0 1.34-.53 2.55-1.4 3.57L22 2zM2 22l7-3 3-7-3-3-7 3v7z"></path></svg>Telegram</a>
+                        </div>
+                    </div>
+                    <!-- Contact Form -->
+                    <div class="neumorph-card p-8 scroll-animate" style="transition-delay: 150ms;">
+                        <h3 class="font-playfair text-3xl font-bold mb-6 text-center md:text-left">Déjanos tus Datos</h3>
+                        <form>
+                            <div class="mb-4"><label for="contact-name" class="block text-gray-300 mb-2">Nombre Completo</label><input type="text" id="contact-name" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" required></div>
+                            <div class="mb-4"><label for="contact-email" class="block text-gray-300 mb-2">Correo Electrónico</label><input type="email" id="contact-email" class="w-full neumorph-input border-transparent rounded-lg px-4 py-3 text-white focus:outline-none" required></div>
+                            <div class="mb-4"><label class="block text-gray-300 mb-2">¿Cuándo prefieres que te contactemos?</label><div class="flex flex-wrap gap-4"><label class="flex items-center space-x-2"><input type="radio" name="contact-time" class="form-radio bg-gray-700"><span>Mañana</span></label><label class="flex items-center space-x-2"><input type="radio" name="contact-time" class="form-radio bg-gray-700"><span>Tarde</span></label><label class="flex items-center space-x-2"><input type="radio" name="contact-time" class="form-radio bg-gray-700" checked><span>Indiferente</span></label></div></div>
+                            <div class="mb-6">
+                                <label class="flex items-center space-x-2 text-gray-400">
+                                    <input type="checkbox" id="age-confirm-contact" class="form-checkbox bg-gray-700" required>
+                                    <span>Confirmo que soy mayor de 18 años.</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="w-full neumorph-btn btn-gold font-bold py-3 px-6 rounded-lg text-lg">Enviar Información</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-12 mt-16">
+            <div class="container mx-auto px-6 text-center text-gray-500">
+                <p class="font-playfair text-2xl font-bold gold-text mb-4">Nocturna</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                     <a href="#" class="hover:text-gray-300 transition-colors">Términos y Condiciones</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Política de Privacidad</a>
+                </div>
+                <p>&copy; 2025 Nocturna Club. Todos los derechos reservados.</p>
+                <p class="text-sm mt-2">Plataforma de entretenimiento para mayores de 18 años.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const mainContent = document.getElementById('main-content');
+            
+            // --- Age Gate Logic ---
+            const ageGate = document.getElementById('age-gate');
+            const ageGateContent = document.getElementById('age-gate-content');
+            const confirmBtn = document.getElementById('confirm-age');
+            setTimeout(() => {
+                ageGateContent.classList.remove('scale-95', 'opacity-0');
+                ageGateContent.classList.add('scale-100', 'opacity-100');
+                body.style.overflow = 'hidden';
+            }, 100);
+            confirmBtn.addEventListener('click', () => {
+                ageGateContent.classList.remove('scale-100', 'opacity-100');
+                ageGateContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    ageGate.style.display = 'none';
+                    mainContent.classList.remove('invisible');
+                    body.style.overflow = '';
+                }, 300);
+            });
+            
+            // --- Modals General Logic ---
+            const setupModal = (modalId, openBtnsSelector, closeBtnId) => {
+                const modal = document.getElementById(modalId);
+                const modalContent = modal.querySelector('.neumorph-card');
+                const openBtns = document.querySelectorAll(openBtnsSelector);
+                const closeBtn = document.getElementById(closeBtnId);
+
+                const open = (data) => {
+                    if (modal.id === 'membership-modal') {
+                        const plan = data;
+                        document.getElementById('plan-type').value = plan;
+                        const modalPlanText = document.getElementById('modal-plan-text');
+                         if (plan === 'Prueba Gratuita') {
+                           modalPlanText.textContent = `Estás reclamando tu prueba gratuita. Completa el formulario para coordinar la validación y agendar tu sesión.`;
+                        } else if (plan === 'Sin especificar') {
+                           modalPlanText.textContent = `Completa el formulario para iniciar tu proceso de selección.`;
+                        }
+                         else {
+                            modalPlanText.textContent = `Estás aplicando para la Membresía ${plan}. Completa el formulario para iniciar tu proceso.`;
+                        }
+                        document.getElementById('form-container').classList.remove('hidden');
+                        document.getElementById('success-message').classList.add('hidden');
+                        document.getElementById('membership-form').reset();
+                    }
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modalContent.classList.remove('scale-95', 'opacity-0', 'translate-y-full');
+                        modalContent.classList.add('scale-100', 'opacity-100', 'translate-y-0');
+                        body.style.overflow = 'hidden';
+                    }, 10);
+                };
+
+                const close = () => {
+                    modalContent.classList.remove('scale-100', 'opacity-100', 'translate-y-0');
+                    modalContent.classList.add('scale-95', 'opacity-0', 'translate-y-full');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        body.style.overflow = '';
+                    }, 300);
+                };
+
+                openBtns.forEach(btn => btn.addEventListener('click', () => open(btn.dataset.plan || null)));
+                closeBtn.addEventListener('click', close);
+                modal.addEventListener('click', (e) => e.target === modal && close());
+                
+                return { open, close };
+            };
+            
+            const membershipModal = setupModal('membership-modal', '.open-modal-btn', 'close-modal-btn');
+            const chatbotModal = setupModal('chatbot-modal', '#open-chatbot-btn', 'close-chatbot-btn');
+            
+            const membershipForm = document.getElementById('membership-form');
+            membershipForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('form-container').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                setTimeout(membershipModal.close, 4000);
+            });
+
+            // --- Currency Toggle Logic ---
+            const currencyToggle = document.getElementById('currency-toggle');
+            const priceContainers = document.querySelectorAll('.price-container');
+            const formatCOP = (num) => new Intl.NumberFormat('es-CO').format(num);
+
+            currencyToggle.addEventListener('change', () => {
+                const isCop = currencyToggle.checked;
+                priceContainers.forEach(container => {
+                    const amountEl = container.querySelector('.price-amount');
+                    const currencyEl = container.querySelector('.price-currency');
+                    const periodEl = container.querySelector('.price-period');
+                    
+                    if (isCop) {
+                        amountEl.textContent = formatCOP(container.dataset.priceCop);
+                        currencyEl.textContent = '$';
+                        periodEl.textContent = 'COP/mes';
+                    } else {
+                        amountEl.textContent = container.dataset.priceUsd;
+                        currencyEl.textContent = '$';
+                        periodEl.textContent = 'USD/mes';
+                    }
+                });
+            });
+
+            // --- Chatbot Simulation Logic ---
+            const chatWindow = document.getElementById('chat-window');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            
+            const addMessage = (message, sender) => {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble p-3 rounded-2xl ${sender === 'user' ? 'chat-bubble-user self-end rounded-br-none' : 'chat-bubble-bot self-start rounded-bl-none'}`;
+                bubble.textContent = message;
+                chatWindow.appendChild(bubble);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            };
+
+            const addTypingIndicator = () => {
+                const indicator = document.createElement('div');
+                indicator.id = 'typing-indicator';
+                indicator.className = 'chat-bubble-bot self-start rounded-bl-none typing-indicator p-3 flex items-center gap-2';
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                chatWindow.appendChild(indicator);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            };
+            
+            const removeTypingIndicator = () => {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            };
+
+            const getBotResponse = (userInput) => {
+                const lowerInput = userInput.toLowerCase();
+                if (lowerInput.includes('club')) return 'La Membresía Club ($100 USD / $400.000 COP) te da acceso a todas nuestras galerías de fotos y videos, contenido nuevo cada 15 días, tips de seducción y sesiones de charla y diversión.';
+                if (lowerInput.includes('black')) return 'La Membresía Black ($150 USD / $600.000 COP) incluye todo lo del plan Club, más acceso prioritario a eventos presenciales, invitaciones a fiestas exclusivas y el servicio de Charlas y Compañía.';
+                if (lowerInput.includes('ilimitada')) return 'Nuestra Membresía Ilimitada ($250 USD / $1.000.000 COP) es la experiencia definitiva. Incluye todo lo de Black, más acceso ilimitado a todos los eventos y sesiones de videollamada y charla (con un máximo de 1 por día). ¡Recuerda que los cupos son limitados!';
+                if (lowerInput.includes('precio') || lowerInput.includes('costo')) return 'Tenemos 3 membresías: Club por $100 USD, Black por $150 USD, e Ilimitada por $250 USD al mes. Puedes ver los precios en pesos colombianos usando el interruptor en la sección de membresías.';
+                if (lowerInput.includes('eventos')) return 'Nuestros eventos presenciales como el Festival de la Cerveza y las Salidas a Fincas Privadas son exclusivos para miembros Black e Ilimitada. Se realizan en Bogotá y sus alrededores.';
+                if (lowerInput.includes('hola') || lowerInput.includes('saludos')) return '¡Hola! Soy Sofía, tu asistente. ¿En qué puedo ayudarte hoy?';
+                return 'Lo siento, no entendí muy bien tu pregunta. Puedes preguntarme sobre los beneficios, precios o diferencias entre las membresías "Club", "Black" e "Ilimitada".';
+            };
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+                
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                
+                setTimeout(() => {
+                    addTypingIndicator();
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        const botMessage = getBotResponse(userMessage);
+                        addMessage(botMessage, 'bot');
+                    }, 1500 + Math.random() * 500);
+                }, 500);
+            });
+
+            addMessage('¡Hola! Soy Sofía, tu asistente. ¿Cómo puedo ayudarte a explorar el mundo de Nocturna?', 'bot');
+
+            // --- Header & Scroll Animations ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('bg-black/80', window.scrollY > 50);
+            });
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+
+            // --- Background Fireflies Effect ---
+            const firefliesCanvas = document.getElementById('fireflies-canvas');
+            const firefliesCtx = firefliesCanvas.getContext('2d');
+            let firefliesState = {};
+            const firefliesLogic = (ctx, s) => {
+                const dpr = window.devicePixelRatio || 1;
+                const w = ctx.canvas.width / dpr, h = ctx.canvas.height / dpr;
+                if (!s.p) { s.p = []; for (let i = 0; i < 30; i++) s.p.push({ x: Math.random() * w, y: Math.random() * h, sz: Math.random() * 3 + 1, sx: (Math.random() - .5) * .5, sy: (Math.random() - .5) * .5, o: Math.random() }); }
+                ctx.clearRect(0, 0, w, h);
+                s.p.forEach(p => {
+                    p.x += p.sx; p.y += p.sy; p.o += (Math.random() - .5) * .1;
+                    if (p.o < 0) p.o = 0; if (p.o > 1) p.o = 1;
+                    if (p.x > w || p.x < 0) p.sx *= -1;
+                    if (p.y > h || p.y < 0) p.sy *= -1;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.sz, 0, Math.PI * 2); ctx.fillStyle = `rgba(250, 204, 21, ${p.o})`; ctx.fill();
+                });
+            };
+            let animationFrameId;
+            const resizeCanvas = () => {
+                const dpr = window.devicePixelRatio || 1;
+                firefliesCanvas.width = window.innerWidth * dpr;
+                firefliesCanvas.height = window.innerHeight * dpr;
+                firefliesCtx.scale(dpr, dpr);
+                firefliesState = {}; 
+                if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                animateEffects();
+            };
+            const animateEffects = () => {
+                firefliesLogic(firefliesCtx, firefliesState);
+                animationFrameId = requestAnimationFrame(animateEffects);
+            };
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        });
+    </script>
+</body>
+</html>
+

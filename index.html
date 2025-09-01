@@ -57,6 +57,11 @@
             box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
             transition: all 0.3s ease-in-out;
         }
+
+        .neumorph-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 18px 18px 32px var(--shadow-dark), -18px -18px 32px var(--shadow-light);
+        }
         
         .neumorph-btn {
             background: var(--bg-color);
@@ -204,8 +209,8 @@
     </div>
 
     <!-- Chatbot Modal -->
-    <div id="chatbot-modal" class="fixed inset-0 z-50 flex items-end justify-center sm:justify-end modal-backdrop hidden">
-        <div class="neumorph-card m-4 w-full max-w-lg h-3/4 flex flex-col transform transition-all duration-300 translate-y-full" id="chatbot-modal-content">
+    <div id="chatbot-modal" class="fixed bottom-4 right-4 z-50 w-full max-w-lg hidden">
+        <div class="neumorph-card m-0 w-full h-[75vh] max-h-[600px] flex flex-col transform transition-all duration-300 translate-y-full opacity-0" id="chatbot-modal-content">
             <div class="p-4 flex items-center justify-between border-b border-gray-700">
                 <div class="flex items-center gap-4">
                     <img src="https://raw.githubusercontent.com/CAMILOSANCHEZDEVELOPER/REPOSITORIO-DE-IMAGENES-CAMILO-/main/Noctura%20-%20Sofia%20DE%20MEDELLIN.png" alt="Sofia AI" class="rounded-full w-10 h-10 object-cover">
@@ -381,7 +386,7 @@
                 <div class="max-w-4xl mx-auto text-center mb-16 scroll-animate">
                     <div class="border-2 border-dashed border-gold-text/50 rounded-2xl p-6">
                         <h4 class="font-bold gold-text mb-2">Información Importante de Ubicación</h4>
-                        <p class="text-gray-300">Todos los eventos presenciales serán realizados en Bogotá y sus alrededores. Próximamente en otros sitios del país. Planeamos experiencias en locaciones reservadas como Airbnb de lujo, fincas privadas y hoteles boutique.</p>
+                        <p class="text-gray-300">Nuestros eventos exclusivos para miembros Black e Ilimitada toman lugar en locaciones cuidadosamente seleccionadas para garantizar una experiencia única y privada. Actualmente, nuestros eventos se centran en Bogotá y sus alrededores, con planes de expansión a otras ciudades principales. Los detalles específicos, incluyendo la ubicación, se comparten directamente con los miembros confirmados para mantener la máxima discreción.</p>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-12">
@@ -408,10 +413,24 @@
         <section id="noticias" class="py-20 sm:py-32">
             <div class="container mx-auto px-6">
                 <h2 class="font-playfair text-4xl sm:text-5xl font-bold text-center mb-4 scroll-animate">Últimas Noticias</h2>
-                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16 scroll-animate">Mantente al día con las novedades, próximos eventos y anuncios importantes de nuestro club.</p>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto text-center mb-16 scroll-animate">
+                    Mantente al día con las novedades, próximos eventos y anuncios importantes de nuestro club.
+                </p>
                 <div class="grid md:grid-cols-2 gap-12">
-                    <div class="neumorph-card overflow-hidden scroll-animate"><img src="https://images.unsplash.com/photo-1597563179532-a54b38d7a1a2?q=80&w=2070&auto=format=fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Anuncio de Expansión a Medellín" class="w-full h-64 object-cover opacity-80"><div class="p-8"><p class="text-sm text-gray-400 mb-2">AGOSTO 2025</p><h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Anuncio de Expansión</h3><p class="text-gray-400 mb-4">Estamos emocionados de anunciar nuestros planes de llevar la experiencia Nocturna a Medellín y Cali a principios del próximo año.</p></div></div>
-                    <div class="neumorph-card overflow-hidden scroll-animate" style="transition-delay: 150ms;"><img src="https://images.unsplash.com/photo-1551024709-8f237c2045e5?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Alianza con marca de licores premium" class="w-full h-64 object-cover opacity-80"><div class="p-8"><p class="text-sm text-gray-400 mb-2">SEPTIEMBRE 2025</p><h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Nueva Alianza Estratégica</h3><p class="text-gray-400 mb-4">Nocturna se asocia con una marca de licores premium para llevar nuestros eventos al siguiente nivel de sofisticación.</p></div></div>
+                    <div class="neumorph-card p-8 scroll-animate">
+                        <p class="text-sm text-gray-400 mb-2">AGOSTO 2025</p>
+                        <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Anuncio de Expansión</h3>
+                        <p class="text-gray-400 mb-4">
+                            Estamos emocionados de anunciar nuestros planes de llevar la experiencia Nocturna a Medellín y Cali a principios del próximo año.
+                        </p>
+                    </div>
+                    <div class="neumorph-card p-8 scroll-animate" style="transition-delay: 150ms;">
+                        <p class="text-sm text-gray-400 mb-2">SEPTIEMBRE 2025</p>
+                         <h3 class="font-playfair text-2xl font-bold mb-2 gold-text">Nueva Alianza Estratégica</h3>
+                        <p class="text-gray-400 mb-4">
+                            Nocturna se asocia con una marca de licores premium para llevar nuestros eventos al siguiente nivel de sofisticación.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -537,8 +556,32 @@
             };
             
             const membershipModal = setupModal('membership-modal', '.open-modal-btn', 'close-modal-btn');
-            const chatbotModal = setupModal('chatbot-modal', '#open-chatbot-btn', 'close-chatbot-btn');
             
+            // --- Chatbot Specific Logic (non-modal) ---
+            const chatbotModal = document.getElementById('chatbot-modal');
+            const chatbotModalContent = document.getElementById('chatbot-modal-content');
+            const openChatbotBtn = document.getElementById('open-chatbot-btn');
+            const closeChatbotBtn = document.getElementById('close-chatbot-btn');
+
+            const openChat = () => {
+                chatbotModal.classList.remove('hidden');
+                setTimeout(() => {
+                    chatbotModalContent.classList.remove('translate-y-full', 'opacity-0');
+                    chatbotModalContent.classList.add('translate-y-0', 'opacity-100');
+                }, 10);
+            };
+
+            const closeChat = () => {
+                chatbotModalContent.classList.remove('translate-y-0', 'opacity-100');
+                chatbotModalContent.classList.add('translate-y-full', 'opacity-0');
+                setTimeout(() => {
+                    chatbotModal.classList.add('hidden');
+                }, 300);
+            };
+
+            openChatbotBtn.addEventListener('click', openChat);
+            closeChatbotBtn.addEventListener('click', closeChat);
+
             const membershipForm = document.getElementById('membership-form');
             membershipForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -679,4 +722,6 @@
     </script>
 </body>
 </html>
+
+
 
